@@ -1,0 +1,36 @@
+name: Stack check
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  stack:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    # TODO 1: add a job-level env block that sets DB_PASSWORD to a throwaway value.
+    steps:
+      - name: Check out code
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Confirm Docker Compose is available
+        run: docker compose version
+
+      # TODO 2: start the stack in the background, build the app image,
+      # and wait at most 120 seconds for every service to be healthy.
+      - name: Start the stack and wait until healthy
+        run: echo "TODO 2" && exit 1
+
+      # TODO 3: request http://127.0.0.1:8095/api/events through Nginx.
+      # Fail on an HTTP error and give up after 10 seconds.
+      - name: Smoke test through Nginx
+        run: echo "TODO 3" && exit 1
+
+      # TODO 4 (Task 2): add a step that saves the service logs, and a step that
+      # uploads them, both only when an earlier step failed.
+
+      # TODO 5 (Task 2): add a final step that always stops the stack.
